@@ -121,9 +121,22 @@ function updatePrice() {
 }
 
 
+var whatsappLink = "https://api.whatsapp.com/send?phone=919000000000&text=Order%20details";
+
+function updateWhatsappLink(){
+  for(let index = 0;  index < items.length; index++){
+    if(items[index].quantity != 0){
+      whatsappLink+=items[index].name+"%20"+items[index].quantity;
+    }
+  }
+  whatsappLink+="The%20total%20amount%20is" + finalDollars + "$%20and%20" + finalCents + "%20cents";
+}
+
 cartButton.onclick = () => {
   updatePrice();
 
+  updateWhatsappLink();
+  window.open(whatsappLink, "_blank");
 
   for (let index = 0; index < items.length; index++) {
     if (items[index].quantity != 0) {
